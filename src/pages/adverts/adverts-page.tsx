@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { getLatestAdverts } from "./service";
 import type { Advert } from "./types";
-import { logout } from "../auth/service";
+import Layout from "../../components/layout/layout";
 
 interface AdvertsPageProps {
+  isLogged: boolean
   onLogout: () => void;
 }
 
-function AdvertsPage({ onLogout }: AdvertsPageProps) {
+function AdvertsPage({ ...rest }: AdvertsPageProps) {
   const [adverts, setAdverts] = useState<Advert[]>([]);
 
   useEffect(() => {
@@ -16,21 +17,17 @@ function AdvertsPage({ onLogout }: AdvertsPageProps) {
     });
   }, []);
 
-  const handleLogoutClick = async () => {
-    await logout();
-    onLogout();
-  };
-
   return (
-    <div className="adverts-page">
-      <h1>Adverts Page</h1>
-      <ul>
-        {adverts.map((advert) => (
-          <li key={advert.id}>{advert.content}</li>
-        ))}
-      </ul>
-      <button onClick={handleLogoutClick}>Logout</button>
-    </div>
+    <Layout title="¡Compra, vende, busca y comparte!" {...rest}>
+      <div className="adverts-page">
+        <h1>Adverts Page</h1>
+        <ul>
+          {adverts.map((advert) => (
+            <li key={advert.id}>{advert.content}</li>
+          ))}
+        </ul>
+      </div>
+    </Layout>
   );
 }
 

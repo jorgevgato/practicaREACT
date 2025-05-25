@@ -18,7 +18,7 @@ function App({ defaultIsLogged }: AppProps) {
   }
 
   return isLogged ? (
-    <AdvertsPage onLogout={handleLogout} />
+    <AdvertsPage isLogged={isLogged} onLogout={handleLogout} />
   ) : (
     <LoginPage onLogin={handleLogin} />
   );
