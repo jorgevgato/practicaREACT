@@ -2,8 +2,12 @@ import { useState } from "react";
 import AdvertsPage from "./pages/adverts/adverts-page";
 import LoginPage from "./pages/auth/login-page";
 
-function App() {
-  const [isLogged, setIsLogged] = useState(false);
+interface AppProps {
+  defaultIsLogged: boolean;
+}
+
+function App({ defaultIsLogged }: AppProps) {
+  const [isLogged, setIsLogged] = useState(defaultIsLogged);
 
   function handleLogin() {
     setIsLogged(true);
