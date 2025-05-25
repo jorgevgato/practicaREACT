@@ -3,18 +3,14 @@ import "./adverts-page.css";
 import { getLatestAdverts } from "./service";
 import type { Advert } from "./types";
 
-
-
 function AdvertsPage() {
+  const [adverts, setAdverts] = useState<Advert[]>([]);
 
-  const [adverts, setAdverts] = useState<Advert[]>([])
-
-  useEffect (() => {
+  useEffect(() => {
     getLatestAdverts().then((adverts) => {
-      setAdverts(adverts)
-    })
-  }, [])
-
+      setAdverts(adverts);
+    });
+  }, []);
 
   return (
     <div className="adverts-page">
