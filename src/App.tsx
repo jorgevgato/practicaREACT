@@ -13,7 +13,15 @@ function App({ defaultIsLogged }: AppProps) {
     setIsLogged(true);
   }
 
-  return isLogged ? <AdvertsPage /> : <LoginPage onLogin={handleLogin} />;
+  function handleLogout() {
+    setIsLogged(false);
+  }
+
+  return isLogged ? (
+    <AdvertsPage onLogout={handleLogout} />
+  ) : (
+    <LoginPage onLogin={handleLogin} />
+  );
 }
 
 export default App;
