@@ -8,15 +8,16 @@ interface LoginPageProps {
 function LoginPage({ onLogin }: LoginPageProps) {
   const [credentials, setCredentials] = useState({
     username: "",
-    password: ""
-  })
-  const {username, password} = credentials
+    password: "",
+  });
+  const { username, password } = credentials;
   const disabled = !username || !password;
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     setCredentials((prevCredentials) => ({
-      ...prevCredentials, [event.target.name]: event.target.value,
-    }))
+      ...prevCredentials,
+      [event.target.name]: event.target.value,
+    }));
   }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
