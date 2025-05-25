@@ -3,12 +3,7 @@ import { getLatestAdverts } from "./service";
 import type { Advert } from "./types";
 import Layout from "../../components/layout/layout";
 
-interface AdvertsPageProps {
-  isLogged: boolean
-  onLogout: () => void;
-}
-
-function AdvertsPage({ ...rest }: AdvertsPageProps) {
+function AdvertsPage() {
   const [adverts, setAdverts] = useState<Advert[]>([]);
 
   useEffect(() => {
@@ -18,7 +13,7 @@ function AdvertsPage({ ...rest }: AdvertsPageProps) {
   }, []);
 
   return (
-    <Layout title="¡Compra, vende, busca y comparte!" {...rest}>
+    <Layout title="¡Compra, vende, busca y comparte!">
       <div className="adverts-page">
         <h1>Adverts Page</h1>
         <ul>

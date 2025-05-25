@@ -1,6 +1,7 @@
 import { useState } from "react";
 import AdvertsPage from "./pages/adverts/adverts-page";
 import LoginPage from "./pages/auth/login-page";
+import { AuthContext } from "./pages/auth/context";
 
 interface AppProps {
   defaultIsLogged: boolean;
@@ -17,10 +18,12 @@ function App({ defaultIsLogged }: AppProps) {
     setIsLogged(false);
   }
 
-  return isLogged ? (
-    <AdvertsPage isLogged={isLogged} onLogout={handleLogout} />
-  ) : (
-    <LoginPage onLogin={handleLogin} />
+  const authValue = { isLogged, onLogin: handleLogin, onLogout: handleLogout };
+
+  return (
+    <AuthContext.Provider value={authValue}>
+      {isLogged ? <AdvertsPage /> : <LoginPage />};
+    </AuthContext.Provider>
   );
 }
 
