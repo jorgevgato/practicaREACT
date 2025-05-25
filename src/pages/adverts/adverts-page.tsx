@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "./adverts-page.css";
 import { getLatestAdverts } from "./service";
 import type { Advert } from "./types";
 

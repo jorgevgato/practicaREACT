@@ -1,21 +1,30 @@
-import type { FormEvent } from "react";
+import { useState, type ChangeEvent, type FormEvent } from "react";
 import { login } from "./service";
 
 interface LoginPageProps {
-  onLogin: () => void
+  onLogin: () => void;
 }
 
-function LoginPage({onLogin}: LoginPageProps) {
+function LoginPage({ onLogin }: LoginPageProps) {
+  const [credentials, setCredentials] = useState({
+    username: "",
+    password: ""
+  })
+  const {username, password} = credentials
+  const disabled = !username || !password;
+
+  function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    setCredentials((prevCredentials) => ({
+      ...prevCredentials, [event.target.name]: event.target.value,
+    }))
+  }
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     try {
-      await login({
-        username: event.target.username.value,
-        password: event.target.password.value,
-      });
-      onLogin()
-
+      await login(credentials);
+      onLogin();
     } catch (error) {
       console.error(error);
     }
@@ -27,13 +36,25 @@ function LoginPage({onLogin}: LoginPageProps) {
       <form onSubmit={handleSubmit}>
         <label>
           Username:
-          <input type="text" name="username" />
+          <input
+            type="text"
+            name="username"
+            value={username}
+            onChange={handleChange}
+          />
         </label>
         <label>
           Password:
-          <input type="password" name="password" />
+          <input
+            type="password"
+            name="password"
+            value={password}
+            onChange={handleChange}
+          />
         </label>
-        <button type="submit">Iniciar sesión</button>
+        <button type="submit" disabled={disabled}>
+          Iniciar sesión
+        </button>
       </form>
     </div>
   );
