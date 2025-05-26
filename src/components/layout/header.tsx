@@ -1,5 +1,6 @@
 import { useAuth } from "../../pages/auth/context";
 import { logout } from "../../pages/auth/service";
+import logo from "../../assets/react.svg";
 
 function Header() {
   const { isLogged, onLogout } = useAuth();
@@ -10,7 +11,9 @@ function Header() {
 
   return (
     <header>
-      <div></div>
+      <div>
+        <img src={logo} />
+      </div>
       <nav>
         {isLogged ? (
           <button onClick={handleLogoutClick}>Logout</button>
