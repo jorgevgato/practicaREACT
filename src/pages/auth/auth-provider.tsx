@@ -20,7 +20,7 @@ function AuthProvider({ defaultIsLogged, children }: AuthProviderProps) {
   const authValue = { isLogged, onLogin: handleLogin, onLogout: handleLogout };
 
   return (
-    <AuthContext.Provider value={authValue}>{children};</AuthContext.Provider>
+    <AuthContext.Provider value={authValue}>{children}</AuthContext.Provider>
   );
 }
 

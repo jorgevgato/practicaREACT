@@ -1,6 +1,7 @@
 import { useAuth } from "../../pages/auth/context";
 import { logout } from "../../pages/auth/service";
 import logo from "../../assets/react.svg";
+import { Link } from "react-router";
 
 function Header() {
   const { isLogged, onLogout } = useAuth();
@@ -18,7 +19,7 @@ function Header() {
         {isLogged ? (
           <button onClick={handleLogoutClick}>Logout</button>
         ) : (
-          <button>Login</button>
+          <Link to="/login"><button>Login</button></Link> 
         )}
       </nav>
     </header>

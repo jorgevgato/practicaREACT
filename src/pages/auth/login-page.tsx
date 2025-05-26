@@ -6,11 +6,11 @@ function LoginPage() {
   const { onLogin } = useAuth();
 
   const [credentials, setCredentials] = useState({
-    username: "",
+    email: "",
     password: "",
   });
-  const { username, password } = credentials;
-  const disabled = !username || !password;
+  const { email, password } = credentials;
+  const disabled = !email || !password;
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     setCredentials((prevCredentials) => ({
@@ -38,8 +38,8 @@ function LoginPage() {
           Username:
           <input
             type="text"
-            name="username"
-            value={username}
+            name="email"
+            value={email}
             onChange={handleChange}
           />
         </label>
