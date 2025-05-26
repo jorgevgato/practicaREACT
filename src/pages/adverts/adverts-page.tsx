@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getLatestAdverts } from "./service";
 import type { Advert } from "./types";
-import Layout from "../../components/layout/layout";
+import Page from "../../components/layout/page";
 
 const EmptyList = () => (
   <div className="tweets-page-empty">
@@ -19,7 +19,7 @@ function AdvertsPage() {
   }, []);
 
   return (
-    <Layout title="¡Compra, vende, busca y comparte!">
+    <Page title="¡Compra, vende, busca y comparte!">
       <div className="adverts-page">
         {adverts.length ? (
           <ul>
@@ -31,7 +31,7 @@ function AdvertsPage() {
           <EmptyList />
         )}
       </div>
-    </Layout>
+    </Page>
   );
 }
 

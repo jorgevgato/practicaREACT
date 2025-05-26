@@ -3,18 +3,14 @@ import Footer from "./footer";
 import Header from "./header";
 
 interface LayoutProps {
-  title: string;
   children: ReactNode;
 }
 
-function Layout({ title, children }: LayoutProps) {
+function Layout({ children }: LayoutProps) {
   return (
     <div>
       <Header />
-      <main>
-        <h2>{title}</h2>
-        {children}
-      </main>
+      <main>{children}</main>
       <Footer />
     </div>
   );
