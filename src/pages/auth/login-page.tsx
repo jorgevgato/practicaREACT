@@ -1,6 +1,9 @@
 import { useState, type ChangeEvent, type FormEvent } from "react";
 import { login } from "./service";
 import { useAuth } from "./context";
+import "../../styles/login.css";
+import { Link } from "react-router";
+import logo from "../../assets/react.svg";
 
 function LoginPage() {
   const { onLogin } = useAuth();
@@ -31,31 +34,37 @@ function LoginPage() {
   }
 
   return (
-    <div>
-      <h1>Inicia sesión</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Username:
-          <input
-            type="text"
-            name="email"
-            value={email}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Password:
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={handleChange}
-          />
-        </label>
-        <button type="submit" disabled={disabled}>
-          Iniciar sesión
-        </button>
-      </form>
+    <div className="main-container">
+      <div className="login-page">
+        <h1>Inicia sesión</h1>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Email
+            <input
+              type="text"
+              name="email"
+              value={email}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Password
+            <input
+              type="password"
+              name="password"
+              value={password}
+              onChange={handleChange}
+            />
+          </label>
+          <button type="submit" disabled={disabled}>
+            Iniciar sesión
+          </button>
+          <Link to="/">
+            {" "}
+            <img src={logo} alt="Ir al inicio" className="login-logo" />
+          </Link>
+        </form>
+      </div>
     </div>
   );
 }
