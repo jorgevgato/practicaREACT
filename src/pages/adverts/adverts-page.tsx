@@ -24,7 +24,9 @@ function AdvertsPage() {
         {adverts.length ? (
           <ul>
             {adverts.map((advert) => (
-              <li key={advert.id}>{advert.content}</li>
+              <li key={advert.id}>
+                {advert.name} {advert.price} €. Tagged: {advert.tags}{" "}
+              </li>
             ))}
           </ul>
         ) : (

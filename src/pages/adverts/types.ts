@@ -1,6 +1,7 @@
 export interface Advert {
-  id: number;
-  userId: number;
-  content: string;
-  updatedAt: string;
+  id: string;
+  name: string;
+  sale: boolean;
+  price: number;
+  tags: [string];
 }

@@ -1,14 +1,8 @@
-import { useAuth } from "../../pages/auth/context";
-import { logout } from "../../pages/auth/service";
 import logo from "../../assets/react.svg";
 import { Link } from "react-router";
+import AuthButton from "../../pages/auth/auth-button";
 
 function Header() {
-  const { isLogged, onLogout } = useAuth();
-  const handleLogoutClick = async () => {
-    await logout();
-    onLogout();
-  };
 
   return (
     <header>
@@ -18,13 +12,8 @@ function Header() {
         </Link>
       </div>
       <nav>
-        {isLogged ? (
-          <button onClick={handleLogoutClick}>Logout</button>
-        ) : (
-          <Link to="/login">
-            <button>Login</button>
-          </Link>
-        )}
+        <Link to="/adverts/new">Crear anuncio</Link>
+        <AuthButton />
       </nav>
     </header>
   );
