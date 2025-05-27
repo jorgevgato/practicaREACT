@@ -4,6 +4,7 @@ import { useAuth } from "./context";
 import "../../styles/login.css";
 import { Link, useLocation, useNavigate } from "react-router";
 import logo from "../../assets/react.svg";
+import { AxiosError } from "axios";
 
 function LoginPage() {
   const { onLogin } = useAuth();
@@ -15,6 +16,7 @@ function LoginPage() {
     password: "",
   });
   const { email, password } = credentials;
+  const [error, setError] = useState<{message: string} | null> (null)
   const disabled = !email || !password;
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
@@ -34,7 +36,9 @@ function LoginPage() {
       const to = location.state?.from ?? "/";
       navigate(to, { replace: true });
     } catch (error) {
-      console.error(error);
+      if (error instanceof AxiosError) {
+        setError({message: error.response?.data?.message})
+      }
     }
   }
 
@@ -69,6 +73,11 @@ function LoginPage() {
             <img src={logo} alt="Ir al inicio" className="login-logo" />
           </Link>
         </form>
+        {error && (
+          <div className="login-error" role="alert" onClick={() => {setError(null)}}>
+            {error.message}
+          </div>
+        )}
       </div>
     </div>
   );

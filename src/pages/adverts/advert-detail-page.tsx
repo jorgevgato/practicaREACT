@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import type { Advert } from "./types";
 import { getAdvertDetail } from "./service";
 import { AxiosError } from "axios";
+import AdvertItem from "./advert-item";
 
 function AdvertDetail() {
   const params = useParams();
@@ -27,12 +28,8 @@ function AdvertDetail() {
 
   return (
     <Page title="Detalle">
-      {advert? (
-        <div className="content">
-          <h2>{advert.name}</h2>
-          <p>Precio: {advert.price}</p>
-          <p>Tags: {advert.tags.join(", ")}</p>
-        </div>
+     {advert? (
+        <div> <AdvertItem advert={advert}/> </div>
       ) : (
         <p></p>
       )}

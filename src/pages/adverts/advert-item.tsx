@@ -12,7 +12,7 @@ const AdvertItem = ({ advert }: AdvertItemProps) => {
       <span>{name}</span>
       <span>{price} €</span>
       <span>{sale}</span>
-      <span>{tags}</span>
+      <span>{tags.join(", ")}</span>
     </div>
   );
 };
