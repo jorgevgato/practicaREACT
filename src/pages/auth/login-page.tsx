@@ -16,8 +16,9 @@ function LoginPage() {
     password: "",
   });
   const { email, password } = credentials;
+  const [isFetching, setIsFetching] = useState<boolean>(false)
   const [error, setError] = useState<{message: string} | null> (null)
-  const disabled = !email || !password;
+  const disabled = !email || !password || isFetching;
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     setCredentials((prevCredentials) => ({
@@ -30,15 +31,20 @@ function LoginPage() {
     event.preventDefault();
 
     try {
+      setIsFetching(true)
       await login(credentials);
       onLogin();
 
       const to = location.state?.from ?? "/";
       navigate(to, { replace: true });
+
     } catch (error) {
       if (error instanceof AxiosError) {
         setError({message: error.response?.data?.message})
       }
+    
+    } finally {
+      setIsFetching(false)
     }
   }
 
