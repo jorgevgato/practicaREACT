@@ -2,6 +2,7 @@ import LoginPage from "./pages/auth/login-page";
 import AdvertsPage from "./pages/adverts/adverts-page";
 import { Navigate, Outlet, Route, Routes } from "react-router";
 import Layout from "./components/layout/layout";
+import RequireAuth from "./pages/auth/require-auth";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
         }
       >
         <Route index element={<AdvertsPage />} />
-        {/* <Route path="new" element={<NewAdvertPage />} />*/}
+        {/* <Route path="new" element={<RequireAuth><NewAdvertPage /></RequireAuth> } />*/}
         {/* <Route path=":advertId" element={<AdvertPage />} />*/}
       </Route>
       <Route path="/" element={<Navigate to="/adverts" />} />

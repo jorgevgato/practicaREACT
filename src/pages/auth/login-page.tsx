@@ -2,11 +2,13 @@ import { useState, type ChangeEvent, type FormEvent } from "react";
 import { login } from "./service";
 import { useAuth } from "./context";
 import "../../styles/login.css";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import logo from "../../assets/react.svg";
 
 function LoginPage() {
   const { onLogin } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const [credentials, setCredentials] = useState({
     email: "",
@@ -28,6 +30,9 @@ function LoginPage() {
     try {
       await login(credentials);
       onLogin();
+
+      const to = location.state?.from ?? "/";
+      navigate(to, { replace: true });
     } catch (error) {
       console.error(error);
     }
