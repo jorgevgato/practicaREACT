@@ -3,6 +3,7 @@ import AdvertsPage from "./pages/adverts/adverts-page";
 import { Navigate, Outlet, Route, Routes } from "react-router";
 import Layout from "./components/layout/layout";
 import RequireAuth from "./pages/auth/require-auth";
+import AdvertDetail from "./pages/adverts/advert-detail-page";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
       >
         <Route index element={<AdvertsPage />} />
         {/* <Route path="new" element={<RequireAuth><NewAdvertPage /></RequireAuth> } />*/}
-        {/* <Route path=":advertId" element={<AdvertPage />} />*/}
+        <Route path=":advertId" element={<AdvertDetail />} />
       </Route>
       <Route path="/" element={<Navigate to="/adverts" />} />
       <Route path="/404" element={<div>404 | Not Found</div>} />
