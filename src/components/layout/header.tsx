@@ -1,6 +1,6 @@
 import logo from "../../assets/react.svg";
 import { Link } from "react-router";
-import "../../styles/header.css"
+import "../../styles/header.css";
 import AuthButton from "../../pages/auth/auth-button";
 
 function Header() {
@@ -12,8 +12,10 @@ function Header() {
         </Link>
       </div>
       <nav className="buttonContainer">
-        <Link className="navButton" to="/adverts/new">Crear anuncio</Link>
-        <AuthButton className="navButton"/>
+        <Link className="navButton" to="/adverts/new">
+          Crear anuncio
+        </Link>
+        <AuthButton className="navButton" />
       </nav>
     </header>
   );

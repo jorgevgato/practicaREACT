@@ -28,8 +28,11 @@ function AdvertDetail() {
 
   return (
     <Page title="Detalle">
-     {advert? (
-        <div> <AdvertItem advert={advert}/> </div>
+      {advert ? (
+        <div>
+          {" "}
+          <AdvertItem advert={advert} />{" "}
+        </div>
       ) : (
         <p></p>
       )}

@@ -1,7 +1,7 @@
 import { useState, type ChangeEvent, type FormEvent } from "react";
 import { login } from "./service";
 import { useAuth } from "./context";
-import "../../styles/login.css";
+import "../../styles/form.css";
 import { Link, useLocation, useNavigate } from "react-router";
 import logo from "../../assets/react.svg";
 import { AxiosError } from "axios";
@@ -16,8 +16,8 @@ function LoginPage() {
     password: "",
   });
   const { email, password } = credentials;
-  const [isFetching, setIsFetching] = useState<boolean>(false)
-  const [error, setError] = useState<{message: string} | null> (null)
+  const [isFetching, setIsFetching] = useState<boolean>(false);
+  const [error, setError] = useState<{ message: string } | null>(null);
   const disabled = !email || !password || isFetching;
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
@@ -31,20 +31,18 @@ function LoginPage() {
     event.preventDefault();
 
     try {
-      setIsFetching(true)
+      setIsFetching(true);
       await login(credentials);
       onLogin();
 
       const to = location.state?.from ?? "/";
       navigate(to, { replace: true });
-
     } catch (error) {
       if (error instanceof AxiosError) {
-        setError({message: error.response?.data?.message})
+        setError({ message: error.response?.data?.message });
       }
-    
     } finally {
-      setIsFetching(false)
+      setIsFetching(false);
     }
   }
 
@@ -80,7 +78,13 @@ function LoginPage() {
           </Link>
         </form>
         {error && (
-          <div className="login-error" role="alert" onClick={() => {setError(null)}}>
+          <div
+            className="login-error"
+            role="alert"
+            onClick={() => {
+              setError(null);
+            }}
+          >
             {error.message}
           </div>
         )}

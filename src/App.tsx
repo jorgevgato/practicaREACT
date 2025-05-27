@@ -4,6 +4,7 @@ import { Navigate, Outlet, Route, Routes } from "react-router";
 import Layout from "./components/layout/layout";
 import RequireAuth from "./pages/auth/require-auth";
 import AdvertDetail from "./pages/adverts/advert-detail-page";
+import AdvertCreator from "./pages/adverts/advert-creator-page";
 
 function App() {
   return (
@@ -18,7 +19,14 @@ function App() {
         }
       >
         <Route index element={<AdvertsPage />} />
-        {/* <Route path="new" element={<RequireAuth><NewAdvertPage /></RequireAuth> } />*/}
+        <Route
+          path="new"
+          element={
+            <RequireAuth>
+              <AdvertCreator />
+            </RequireAuth>
+          }
+        />
         <Route path=":advertId" element={<AdvertDetail />} />
       </Route>
       <Route path="/" element={<Navigate to="/adverts" />} />

@@ -5,7 +5,8 @@
   height: calc(100vh - 150px);
 }
 
-.login-page {
+.login-page,
+.creator-page {
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
@@ -16,30 +17,35 @@
   width: 300px;
 }
 
-.login-page h1 {
+.login-page h1,
+.creator-page h2 {
   text-align: center;
 }
 
-.login-page form {
+.login-page form,
+.creator-page form {
   display: flex;
   flex-direction: column;
 }
 
-.login-page label {
+.login-page label,
+.creator-page label.manual-label {
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
   font-weight: bold;
 }
 
-.login-page input {
+.login-page input,
+.manual {
   padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 1rem;
 }
 
-.login-page button {
+.login-page button,
+.creator-page button {
   align-self: center;
   padding: 0.6rem 1.5rem;
   background-color: #007bff;
@@ -76,6 +82,27 @@
 
 .login-error {
   text-align: center;
-    padding: 0.2rem;
-    color: #555;
+  padding: 0.2rem;
+  color: #555;
+}
+
+.fieldset {
+  border-left: none;
+  border-bottom: none;
+  border-right: none;
+  padding: 1rem 0;
+}
+
+.radio-group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.creator-page.radio-group label {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: normal;
 }
