@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { getLatestAdverts } from "./service";
 import type { Advert } from "./types";
 import Page from "../../components/layout/page";
+import { Link } from "react-router";
+import AdvertItem from "./advert-item";
 
 const EmptyList = () => (
   <div className="tweets-page-empty">
@@ -24,8 +26,14 @@ function AdvertsPage() {
         {adverts.length ? (
           <ul>
             {adverts.map((advert) => (
-              <li key={advert.id}>
+              /** <li key={advert.id}>
                 {advert.name} {advert.price} €. Tagged: {advert.tags}{" "}
+              </li>
+              */
+              <li key={advert.id}>
+                <Link to={`/adverts/${advert.id}`}>
+                  <AdvertItem advert={advert} />
+                </Link>
               </li>
             ))}
           </ul>

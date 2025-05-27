@@ -4,4 +4,5 @@ export interface Advert {
   sale: boolean;
   price: number;
   tags: [string];
+  photo: string;
 }

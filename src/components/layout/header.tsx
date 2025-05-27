@@ -3,7 +3,6 @@ import { Link } from "react-router";
 import AuthButton from "../../pages/auth/auth-button";
 
 function Header() {
-
   return (
     <header>
       <div>
