@@ -79,7 +79,7 @@ function LoginPage() {
         </form>
         {error && (
           <div
-            className="login-error"
+            className="form-error"
             role="alert"
             onClick={() => {
               setError(null);

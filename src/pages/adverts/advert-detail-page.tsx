@@ -29,7 +29,7 @@ function AdvertDetail() {
   return (
     <Page title="Detalle">
       {advert ? (
-        <div>
+        <div className="detail">
           {" "}
           <AdvertItem advert={advert} />{" "}
         </div>
