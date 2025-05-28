@@ -25,25 +25,41 @@ function AdvertCreator() {
           <fieldset className="fieldset">
             <legend>Compraventa</legend>
             <div className="radio-group">
-              <label>Compra</label>
-              <input type="radio" name="buySell" value="buy" />
-              <label>Venta</label>
-              <input type="radio" name="buySell" value="sell" />
+              <label>
+                <input type="radio" name="buySell" value="buy" />
+                Compra
+              </label>
+              <label>
+                <input type="radio" name="buySell" value="sell" />
+                Venta
+              </label>
             </div>
           </fieldset>
           <fieldset className="fieldset">
             <legend>Tags</legend>
             <div className="radio-group">
-              <label>lifestyle</label>
-              <input type="radio" name="lifestyle" />
-              <label>mobile</label>
-              <input type="radio" name="mobile" />
-              <label>motor</label>
-              <input type="radio" name="motor" />
-              <label>work</label>
-              <input type="radio" name="work" />
+              <label>
+                <input type="radio" name="lifestyle" />
+                lifestyle
+              </label>
+              <label>
+                <input type="radio" name="mobile" />
+                mobile
+              </label>
+              <label>
+                <input type="radio" name="motor" />
+                motor
+              </label>
+              <label>
+                <input type="radio" name="work" />
+                work
+              </label>
             </div>
           </fieldset>
+          <div className="file-upload">
+            <label className="manual-label">Añade una imagen</label>
+            <input className="input-file" type="file" name="file" />
+          </div>
 
           <button type="submit">Crear</button>
         </form>

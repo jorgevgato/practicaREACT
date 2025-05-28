@@ -36,6 +36,10 @@
   font-weight: bold;
 }
 
+.creator-page legend {
+  font-weight: bold;
+}
+
 .login-page input,
 .manual {
   padding: 0.5rem;
@@ -99,10 +103,25 @@
   gap: 0.5rem;
 }
 
-.creator-page.radio-group label {
-  display: flex !important;
-  flex-direction: row !important;
+.radio-group label {
+  display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 0.4rem;
   font-weight: normal;
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.radio-group label:hover {
+  background-color: #f0f0f0;
+}
+
+.file-upload {
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
