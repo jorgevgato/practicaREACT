@@ -1,8 +1,8 @@
-import { useState, type ChangeEvent, type FormEvent } from "react";
+import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
 import "../../styles/form.css";
 import { useNavigate } from "react-router";
 import { AxiosError } from "axios";
-import { createAdvert } from "./service";
+import { createAdvert, getTags } from "./service";
 
 function AdvertCreator() {
   const navigate = useNavigate();
@@ -23,8 +23,23 @@ function AdvertCreator() {
 
   const { name, price, sale, tags, photo } = advert;
   const [isFetching, setIsFetching] = useState<boolean>(false);
+  const [availableTags, setAvailableTags] = useState<string[]>([])
   const [error, setError] = useState<{ message: string } | null>(null);
   const disabled = !name || !price || !tags.length || isFetching;
+
+  useEffect(() => {
+    async function fetchTags() {
+      try {
+        const tags = await getTags();
+        setAvailableTags(tags);
+      } catch (error) {
+        if (error instanceof AxiosError) {
+        setError({ message: error.response?.data?.message });
+      }
+      }
+    }
+    fetchTags();
+  }, []);
 
   function handleChange(
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
@@ -93,7 +108,7 @@ function AdvertCreator() {
 
         <form onSubmit={handleSubmit}>
           <label className="manual-label">
-            Nombre o descripción de tu producto
+            * Nombre o descripción
             <input
               className="manual"
               type="text"
@@ -106,7 +121,7 @@ function AdvertCreator() {
             />
           </label>
           <label className="manual-label">
-            Precio
+            * Precio
             <input
               className="manual"
               type="number"
@@ -117,7 +132,7 @@ function AdvertCreator() {
           </label>
 
           <fieldset className="fieldset">
-            <legend>Compraventa</legend>
+            <legend>* Compraventa</legend>
             <div className="radio-group">
               <label>
                 <input
@@ -143,9 +158,9 @@ function AdvertCreator() {
           </fieldset>
 
           <fieldset className="fieldset">
-            <legend>Tags</legend>
+            <legend>* Tags</legend>
             <div className="radio-group">
-              {["lifestyle", "mobile", "motor", "work"].map((tag) => (
+              {availableTags.map((tag) => (
                 <label key={tag}>
                   <input
                     type="checkbox"
