@@ -5,6 +5,7 @@ import type { Advert } from "./types";
 import { getAdvertDetail } from "./service";
 import { AxiosError } from "axios";
 import AdvertItem from "./advert-item";
+import "../../styles/advert-detail.css";
 
 function AdvertDetail() {
   const params = useParams();
@@ -29,9 +30,11 @@ function AdvertDetail() {
   return (
     <Page title="Detalle">
       {advert ? (
-        <div className="detail">
-          {" "}
-          <AdvertItem advert={advert} />{" "}
+        <div className="advert-detail-page">
+          <div className="ad-container">
+            {" "}
+            <AdvertItem advert={advert} />{" "}
+          </div>
         </div>
       ) : (
         <p></p>

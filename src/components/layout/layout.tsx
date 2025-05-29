@@ -8,7 +8,7 @@ interface LayoutProps {
 
 function Layout({ children }: LayoutProps) {
   return (
-    <div>
+    <div className="layout-page">
       <Header />
       <main>{children}</main>
       <Footer />

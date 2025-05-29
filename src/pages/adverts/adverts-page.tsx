@@ -4,6 +4,7 @@ import type { Advert } from "./types";
 import Page from "../../components/layout/page";
 import { Link } from "react-router";
 import AdvertItem from "./advert-item";
+import "../../styles/adverts-page.css";
 
 const EmptyList = () => (
   <div className="tweets-page-empty">
@@ -22,21 +23,17 @@ function AdvertsPage() {
 
   return (
     <Page title="¡Compra, vende, busca y comparte!">
-      <div className="adverts-page">
+      <div className="ads-container">
         {adverts.length ? (
-          <ul>
-            {adverts.map((advert) => (
-              /** <li key={advert.id}>
-                {advert.name} {advert.price} €. Tagged: {advert.tags}{" "}
-              </li>
-              */
-              <li key={advert.id}>
-                <Link to={`/adverts/${advert.id}`}>
-                  <AdvertItem advert={advert} />
-                </Link>
-              </li>
-            ))}
-          </ul>
+          adverts.map((advert) => (
+            <Link
+              to={`/adverts/${advert.id}`}
+              key={advert.id}
+              className="ad-card"
+            >
+              <AdvertItem advert={advert} />
+            </Link>
+          ))
         ) : (
           <EmptyList />
         )}
