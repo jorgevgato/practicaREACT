@@ -23,7 +23,7 @@ function AdvertCreator() {
 
   const { name, price, sale, tags, photo } = advert;
   const [isFetching, setIsFetching] = useState<boolean>(false);
-  const [availableTags, setAvailableTags] = useState<string[]>([])
+  const [availableTags, setAvailableTags] = useState<string[]>([]);
   const [error, setError] = useState<{ message: string } | null>(null);
   const disabled = !name || !price || !tags.length || isFetching;
 
@@ -34,8 +34,8 @@ function AdvertCreator() {
         setAvailableTags(tags);
       } catch (error) {
         if (error instanceof AxiosError) {
-        setError({ message: error.response?.data?.message });
-      }
+          setError({ message: error.response?.data?.message });
+        }
       }
     }
     fetchTags();

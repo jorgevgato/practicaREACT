@@ -61,18 +61,20 @@
   transition: background-color 0.2s ease;
 }
 
-.login-page button:disabled {
+.login-page button:disabled,
+.creator-page button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
 
-.login-page button:not(:disabled):hover {
+.login-page button:not(:disabled):hover,
+.creator-page button:not(:disabled):hover {
   background-color: #0056b3;
 }
 
 .login-logo {
   display: block;
-  margin: 1rem auto 0; /* arriba 1rem, abajo 0, centrado con auto */
+  margin: 1rem auto 0;
   max-width: 120px;
   height: auto;
   opacity: 0.8;
