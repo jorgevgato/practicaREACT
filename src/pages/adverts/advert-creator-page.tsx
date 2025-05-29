@@ -1,23 +1,23 @@
 import { useState, type ChangeEvent, type FormEvent } from "react";
 import "../../styles/form.css";
 import { useNavigate } from "react-router";
-import { createAdvert } from "../auth/service";
 import { AxiosError } from "axios";
+import { createAdvert } from "./service";
 
 function AdvertCreator() {
   const navigate = useNavigate();
 
   const [advert, setAdvert] = useState<{
-  name: string;
-  price: string;
-  sale: boolean;
-  tags: string[];
-  photo: File | null;
-}>({
+    name: string;
+    price: string;
+    sale: boolean;
+    tags: string[];
+    photo: File | null;
+  }>({
     name: "",
     price: "",
     sale: true,
-    tags: [] as string[],
+    tags: [],
     photo: null,
   });
 
@@ -55,9 +55,9 @@ function AdvertCreator() {
   function handlePhotoChange(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0];
     if (file) {
-      setAdvert((prev) => ({...prev, photo: file}))
+      setAdvert((prev) => ({ ...prev, photo: file }));
     } else {
-      setAdvert((prev) => ({...prev, photo: null}))
+      setAdvert((prev) => ({ ...prev, photo: null }));
     }
   }
 
@@ -66,14 +66,16 @@ function AdvertCreator() {
     try {
       setIsFetching(true);
 
-      const payload = {
-        name,
-        price: parseFloat(price),
-        sale,
-        tags,
-        photo,
-      };
-      await createAdvert(payload);
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("price", price);
+      formData.append("sale", sale.toString());
+      tags.forEach((tag) => formData.append("tags", tag));
+      if (photo) {
+        formData.append("photo", photo);
+      }
+
+      await createAdvert(formData);
       navigate("/");
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -95,6 +97,9 @@ function AdvertCreator() {
             <input
               className="manual"
               type="text"
+              maxLength={90}
+              minLength={3}
+              placeholder="Máx. 90 caracteres"
               name="name"
               value={name}
               onChange={handleChange}

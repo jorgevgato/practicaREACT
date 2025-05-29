@@ -13,3 +13,8 @@ export const getAdvertDetail = async (advertId: string) => {
   const response = await client.get<Advert>(url);
   return response.data;
 };
+
+export const createAdvert = async (payload: FormData) => {
+  const response = await client.post<Advert>(ADVERTS_URL, payload);
+  return response.data;
+};

@@ -3,6 +3,7 @@ export interface Advert {
   name: string;
   sale: boolean;
   price: number;
-  tags: [string];
-  photo: string;
+  tags: string[];
+  photo: string | null;
+  createdAt: string;
 }
