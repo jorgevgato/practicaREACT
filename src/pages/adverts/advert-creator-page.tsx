@@ -94,7 +94,9 @@ function AdvertCreator() {
       navigate(`/adverts/${newAdvert.id}`);
     } catch (error) {
       if (error instanceof AxiosError) {
-        setError({ message: error.response?.data?.message });
+        if (error.status === 401) {
+          navigate("/login", { replace: true });
+        }
       }
     } finally {
       setIsFetching(false);

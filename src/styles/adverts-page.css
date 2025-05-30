@@ -46,3 +46,9 @@ a.ad-card:hover {
   font-style: italic;
   -webkit-text-fill-color: #007bff;
 }
+
+.page-title {
+  text-align: center;
+  font-size: 2rem;
+  margin: 2rem 0;
+}
