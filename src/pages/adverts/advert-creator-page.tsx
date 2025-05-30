@@ -90,8 +90,8 @@ function AdvertCreator() {
         formData.append("photo", photo);
       }
 
-      await createAdvert(formData);
-      navigate("/");
+      const newAdvert = await createAdvert(formData);
+      navigate(`/adverts/${newAdvert.id}`);
     } catch (error) {
       if (error instanceof AxiosError) {
         setError({ message: error.response?.data?.message });
