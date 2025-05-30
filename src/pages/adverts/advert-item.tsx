@@ -9,13 +9,7 @@ const AdvertItem = ({ advert }: AdvertItemProps) => {
 
   return (
     <div className="advert-item-detail">
-      {photo && (
-        <img
-          src={`${import.meta.env.VITE_API_BASE_URL}/${photo}`}
-          alt={name}
-          className="advert-photo"
-        />
-      )}
+      {photo && <img src={photo} alt={name} className="advert-photo" />}
       <h3 className="advert-name">{name}</h3>
       <p className="advert-sale">
         {sale ? "Compra" : "Venta"} - {price} €

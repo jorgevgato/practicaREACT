@@ -47,8 +47,15 @@ a.ad-card:hover {
   -webkit-text-fill-color: #007bff;
 }
 
-.page-title {
+.page-title,
+.no-adverts {
   text-align: center;
   font-size: 2rem;
+  margin: 2rem 0;
+}
+
+.try-login {
+  text-align: center;
+  font-size: 1.5rem;
   margin: 2rem 0;
 }

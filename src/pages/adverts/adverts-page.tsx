@@ -7,8 +7,11 @@ import AdvertItem from "./advert-item";
 import "../../styles/adverts-page.css";
 
 const EmptyList = () => (
-  <div className="tweets-page-empty">
-    <p>No hay anuncios disponibles.</p>
+  <div className="empty-adverts">
+    <p className="no-adverts">No hay anuncios disponibles.</p>
+    <p className="try-login">
+      Prueba <Link to={"/login"}> iniciando sesión</Link>.
+    </p>
   </div>
 );
 

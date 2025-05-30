@@ -81,6 +81,10 @@ function AdvertCreator() {
     try {
       setIsFetching(true);
 
+      /**
+      const {data} = await axios.post()
+       */
+
       const formData = new FormData();
       formData.append("name", name);
       formData.append("price", price);
