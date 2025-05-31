@@ -11,7 +11,7 @@ const EmptyList = () => (
   <div className="empty-adverts">
     <p className="no-adverts">No hay anuncios disponibles.</p>
     <p className="try-login">
-      Prueba <Link to={"/login"}> iniciando sesión</Link>.
+      Si no has iniciado sesión, <Link to={"/login"}> pulsa aquí</Link>.
     </p>
   </div>
 );
@@ -77,8 +77,8 @@ function AdvertsPage() {
       <div className="filters-row">
         <select value={typeFilter} onChange={handleTypeChange}>
           <option value="">Todos</option>
-          <option value="buy">Venta</option>
-          <option value="sell">Compra</option>
+          <option value="buy">Compra</option>
+          <option value="sell">Venta</option>
         </select>
 
         <div className="available-tags">

@@ -140,8 +140,8 @@ function AdvertCreator() {
                 <input
                   type="radio"
                   name="sale"
-                  value="true"
-                  checked={sale === true}
+                  value="false"
+                  checked={sale === false}
                   onChange={handleChange}
                 />
                 Compra
@@ -150,8 +150,8 @@ function AdvertCreator() {
                 <input
                   type="radio"
                   name="sale"
-                  value="false"
-                  checked={sale === false}
+                  value="true"
+                  checked={sale === true}
                   onChange={handleChange}
                 />
                 Venta

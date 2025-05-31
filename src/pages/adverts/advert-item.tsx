@@ -14,7 +14,7 @@ const AdvertItem = ({ advert }: AdvertItemProps) => {
       <img src={imageSrc} alt={name} className="advert-photo" />
       <h3 className="advert-name">{name}</h3>
       <p className="advert-sale">
-        {sale ? "Compra" : "Venta"} - {price} €
+        {sale ? "Venta" : "Compra"} - {price} €
       </p>
       <p className="advert-tags">{tags.join(", ")}</p>
     </div>
