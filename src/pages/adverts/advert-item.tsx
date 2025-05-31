@@ -6,8 +6,8 @@ interface AdvertItemProps {
 
 const AdvertItem = ({ advert }: AdvertItemProps) => {
   const { name, sale, price, tags, photo } = advert;
-  const defaultPhoto = "/vite.svg"
-  const imageSrc = photo || defaultPhoto
+  const defaultPhoto = "/vite.svg";
+  const imageSrc = photo || defaultPhoto;
 
   return (
     <div className="advert-item-detail">

@@ -28,7 +28,7 @@ function AdvertDetail() {
   }, [params.advertId, navigate]);
 
   return (
-    <Page title="Detalle">
+    <Page title="">
       {advert ? (
         <div className="advert-detail-page">
           <div className="ad-container">

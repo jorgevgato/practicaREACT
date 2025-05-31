@@ -121,6 +121,15 @@
   background-color: #f0f0f0;
 }
 
+.login-page label.remember-check {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 1.5rem;
+  gap: 0.5rem;
+  font-weight: normal;
+}
+
 .file-upload {
   margin: 1rem 0;
   display: flex;

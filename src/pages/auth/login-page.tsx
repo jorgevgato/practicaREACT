@@ -15,6 +15,7 @@ function LoginPage() {
     email: "",
     password: "",
   });
+  const [rememberMe, setRememberMe] = useState(false);
   const { email, password } = credentials;
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [error, setError] = useState<{ message: string } | null>(null);
@@ -27,12 +28,16 @@ function LoginPage() {
     }));
   }
 
+  function handleRememberMeChange(event: ChangeEvent<HTMLInputElement>) {
+    setRememberMe(event.target.checked);
+  }
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     try {
       setIsFetching(true);
-      await login(credentials);
+      await login(credentials, rememberMe);
       onLogin();
 
       const to = location.state?.from ?? "/";
@@ -72,6 +77,14 @@ function LoginPage() {
           <button type="submit" disabled={disabled}>
             Iniciar sesión
           </button>
+          <label className="remember-check">
+            <input
+              type="checkbox"
+              checked={rememberMe}
+              onChange={handleRememberMeChange}
+            />
+            <span>Recordar contraseña</span>
+          </label>
           <Link to="/">
             {" "}
             <img src={logo} alt="Ir al inicio" className="login-logo" />

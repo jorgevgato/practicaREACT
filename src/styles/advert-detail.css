@@ -18,7 +18,8 @@
 }
 
 .advert-photo {
-  width: 100%;
+  width: 500px;
+  max-width: 100%;
   height: auto;
   border-radius: 8px;
   object-fit: cover;

@@ -7,7 +7,7 @@ import AuthProvider from "./pages/auth/auth-provider.tsx";
 import { BrowserRouter } from "react-router";
 import ErrorBoundary from "./components/errors/error-boundary.tsx";
 
-const accessToken = storage.get("auth");
+const accessToken = storage.local.get("auth") || storage.session.get("auth");
 if (accessToken) {
   setAuthorizationHeader(accessToken);
 }

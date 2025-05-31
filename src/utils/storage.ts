@@ -1,23 +1,31 @@
-type StorageKey = "auth";
+export type StorageKey = "auth";
+type StorageType = "local" | "session";
 
-export default {
-  get(key: StorageKey) {
-    const value = localStorage.getItem(key);
-    if (!value) {
-      return null;
-    }
-    return value;
-  },
+const createStorage = (type: StorageType) => {
+  const storageObject = type === "local" ? localStorage : sessionStorage;
 
-  set(key: StorageKey, value: string) {
-    localStorage.setItem(key, value);
-  },
+  return {
+    get(key: StorageKey): string | null {
+      return storageObject.getItem(key);
+    },
 
-  remove(key: StorageKey) {
-    localStorage.removeItem(key);
-  },
+    set(key: StorageKey, value: string): void {
+      storageObject.setItem(key, value);
+    },
 
-  clearInterval() {
-    localStorage.clear();
-  },
+    remove(key: StorageKey): void {
+      storageObject.removeItem(key);
+    },
+
+    clearInterval(): void {
+      storageObject.clear();
+    },
+  };
 };
+
+const storage = {
+  local: createStorage("local"),
+  session: createStorage("session"),
+};
+
+export default storage;
