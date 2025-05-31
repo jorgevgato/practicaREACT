@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router";
 import Page from "../../components/layout/page";
 import { useEffect, useState } from "react";
 import type { Advert } from "./types";
-import { getAdvertDetail } from "./service";
+import { deleteAdvert, getAdvertDetail } from "./service";
 import { AxiosError } from "axios";
 import AdvertItem from "./advert-item";
 import "../../styles/advert-detail.css";
@@ -27,6 +27,21 @@ function AdvertDetail() {
       });
   }, [params.advertId, navigate]);
 
+  const handleDelete = async () => {
+      if (!advert) return
+
+      const confirmed = window.confirm("¿Borrar anuncio?")
+      if (!confirmed) return
+
+      try {
+        await deleteAdvert(advert.id)
+        navigate("/"), {replace: true}
+      } catch (error) {
+        console.error("Error al borrar el anuncio", error)
+        window.alert("Error intentando borrar el anuncio.")
+      }
+    }    
+
   return (
     <Page title="">
       {advert ? (
@@ -34,6 +49,9 @@ function AdvertDetail() {
           <div className="ad-container">
             {" "}
             <AdvertItem advert={advert} />{" "}
+            <button className="delete-button" onClick={handleDelete}>
+              Borrar
+            </button>
           </div>
         </div>
       ) : (
