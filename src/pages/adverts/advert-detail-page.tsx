@@ -28,19 +28,19 @@ function AdvertDetail() {
   }, [params.advertId, navigate]);
 
   const handleDelete = async () => {
-      if (!advert) return
+    if (!advert) return;
 
-      const confirmed = window.confirm("¿Borrar anuncio?")
-      if (!confirmed) return
+    const confirmed = window.confirm("¿Borrar anuncio?");
+    if (!confirmed) return;
 
-      try {
-        await deleteAdvert(advert.id)
-        navigate("/"), {replace: true}
-      } catch (error) {
-        console.error("Error al borrar el anuncio", error)
-        window.alert("Error intentando borrar el anuncio.")
-      }
-    }    
+    try {
+      await deleteAdvert(advert.id);
+      navigate("/"), { replace: true };
+    } catch (error) {
+      console.error("Error al borrar el anuncio", error);
+      window.alert("Error intentando borrar el anuncio.");
+    }
+  };
 
   return (
     <Page title="">

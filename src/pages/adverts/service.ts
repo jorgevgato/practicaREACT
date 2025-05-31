@@ -26,6 +26,6 @@ export const createAdvert = async (payload: FormData) => {
 
 export const deleteAdvert = async (advertId: string) => {
   const url = `${ADVERTS_URL}/${advertId}`;
-  const response = await client.delete<Advert>(url)
-  return response.data
-}
+  const response = await client.delete<Advert>(url);
+  return response.data;
+};
