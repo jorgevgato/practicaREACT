@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { getLatestAdverts } from "./service";
+import { getLatestAdverts, getTags } from "./service";
 import type { Advert } from "./types";
 import Page from "../../components/layout/page";
 import { Link } from "react-router";
 import AdvertItem from "./advert-item";
 import "../../styles/adverts-page.css";
+import { AxiosError } from "axios";
 
 const EmptyList = () => (
   <div className="empty-adverts">
@@ -17,6 +18,10 @@ const EmptyList = () => (
 
 function AdvertsPage() {
   const [adverts, setAdverts] = useState<Advert[]>([]);
+  const [filteredAdverts, setFilteredAdverts] = useState<Advert[]>([]);
+  const [availableTags, setAvailableTags] = useState<string[]>([]);
+  const [typeFilter, setTypeFilter] = useState<string>("");
+  const [tagFilters, setTagFilters] = useState<string[]>([]);
 
   useEffect(() => {
     getLatestAdverts().then((adverts) => {
@@ -24,11 +29,76 @@ function AdvertsPage() {
     });
   }, []);
 
+  useEffect(() => {
+    async function fetchTags() {
+      try {
+        const tags = await getTags();
+        setAvailableTags(tags);
+      } catch (error) {
+        if (error instanceof AxiosError) {
+          console.error(
+            "Error al obtener tags.",
+            error.response?.data?.message,
+          );
+        }
+      }
+    }
+    fetchTags();
+  }, []);
+
+  useEffect(() => {
+    const filtered = adverts.filter((ad) => {
+      const matchesType =
+        typeFilter === "" ||
+        (typeFilter === "buy" && !ad.sale) ||
+        (typeFilter === "sell" && ad.sale);
+
+      const matchesTags =
+        tagFilters.length === 0 ||
+        tagFilters.every((tag) => ad.tags.includes(tag));
+
+      return matchesType && matchesTags;
+    });
+    setFilteredAdverts(filtered);
+  }, [adverts, typeFilter, tagFilters]);
+
+  const handleTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setTypeFilter(event.target.value);
+  };
+
+  const handleTagToggle = (tag: string) => {
+    setTagFilters((prev) =>
+      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag],
+    );
+  };
+
   return (
     <Page title="¡Compra, vende, busca y comparte!">
+      <div className="filters-row">
+        <select value={typeFilter} onChange={handleTypeChange}>
+          <option value="">Todos</option>
+          <option value="buy">Venta</option>
+          <option value="sell">Compra</option>
+        </select>
+
+        <div className="available-tags">
+          {availableTags.map((tag) => (
+            <label className="checkbox-label" key={tag}>
+              <input
+                type="checkbox"
+                value={tag}
+                checked={tagFilters.includes(tag)}
+                onChange={() => handleTagToggle(tag)}
+              />
+              {tag}
+            </label>
+          ))}
+        </div>
+      </div>
+
       <div className="ads-container">
-        {adverts.length ? (
-          adverts.map((advert) => (
+        {filteredAdverts.length ? (
+          filteredAdverts.map((advert) => (
             <Link
               to={`/adverts/${advert.id}`}
               key={advert.id}
