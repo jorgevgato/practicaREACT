@@ -136,18 +136,3 @@
   flex-direction: column;
   gap: 0.5rem;
 }
-
-.delete-button {
-  background-color: #ff4d4f;
-  color: white;
-  padding: 0.6rem 1rem;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-top: 0.3rem;
-  transition: background-color 0.2s ease;
-}
-
-.delete-button:hover {
-  background-color: #d9363e;
-}

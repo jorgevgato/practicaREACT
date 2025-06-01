@@ -35,3 +35,40 @@
   color: #444;
   text-align: center;
 }
+
+.delete-button,
+.modal-buttons button {
+  background-color: #ff4d4f;
+  color: white;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 0 1rem;
+  margin-top: 0.3rem;
+  transition: background-color 0.2s ease;
+}
+
+.delete-button:hover,
+.modal-buttons button:hover {
+  background-color: #d9363e;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  background: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  text-align: center;
+}

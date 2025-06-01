@@ -10,6 +10,7 @@ import "../../styles/advert-detail.css";
 function AdvertDetail() {
   const params = useParams();
   const [advert, setAdvert] = useState<Advert | null>(null);
+  const [showConfirm, setShowConfirm] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,11 +28,8 @@ function AdvertDetail() {
       });
   }, [params.advertId, navigate]);
 
-  const handleDelete = async () => {
+  const confirmDelete = async () => {
     if (!advert) return;
-
-    const confirmed = window.confirm("¿Borrar anuncio?");
-    if (!confirmed) return;
 
     try {
       await deleteAdvert(advert.id);
@@ -49,9 +47,28 @@ function AdvertDetail() {
           <div className="ad-container">
             {" "}
             <AdvertItem advert={advert} />{" "}
-            <button className="delete-button" onClick={handleDelete}>
+            <button
+              className="delete-button"
+              onClick={() => setShowConfirm(true)}
+            >
               Borrar
             </button>
+            {showConfirm && (
+              <div className="modal-backdrop">
+                <div className="modal">
+                  <p>¿Estás seguro de que quieres borrar este anuncio?</p>
+                  <div className="modal-buttons">
+                    <button onClick={confirmDelete}>Sí, borrar</button>
+                    <button
+                      className="cancel"
+                      onClick={() => setShowConfirm(false)}
+                    >
+                      Cancelar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       ) : (
