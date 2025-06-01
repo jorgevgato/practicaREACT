@@ -1,0 +1,11 @@
+.page-404 {
+  display: block;
+  margin: 1rem auto 0;
+  max-width: 100%;
+}
+
+.page-404 p {
+  justify-self: center;
+  font-size:xx-large;
+  font-family: monospace;
+}
