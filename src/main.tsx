@@ -6,6 +6,10 @@ import { setAuthorizationHeader } from "./api/client.ts";
 import AuthProvider from "./pages/auth/auth-provider.tsx";
 import { BrowserRouter } from "react-router";
 import ErrorBoundary from "./components/errors/error-boundary.tsx";
+import configureStore from "./store/index.ts";
+import { Provider } from "react-redux";
+
+const store = configureStore();
 
 const accessToken = storage.local.get("auth") || storage.session.get("auth");
 if (accessToken) {
@@ -17,7 +21,9 @@ createRoot(document.getElementById("root")!).render(
     <ErrorBoundary>
       <AuthProvider defaultIsLogged={accessToken ? true : false}>
         <BrowserRouter>
-          <App />
+          <Provider store={store}>
+            <App />
+          </Provider>
         </BrowserRouter>
       </AuthProvider>
     </ErrorBoundary>
