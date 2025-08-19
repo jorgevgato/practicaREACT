@@ -1,13 +1,16 @@
 import { useState, type ChangeEvent, type FormEvent } from "react";
 import { login } from "./service";
-import { useAuth } from "./context";
+/* import { useAuth } from "./context"; */
 import "../../styles/form.css";
 import { Link, useLocation, useNavigate } from "react-router";
 import logo from "../../assets/react.svg";
 import { AxiosError } from "axios";
+import { authLogin } from "../../store/action";
+import { useAppDispatch } from "../../store";
 
 function LoginPage() {
-  const { onLogin } = useAuth();
+  /* const { onLogin } = useAuth(); */
+  const dispatch = useAppDispatch();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -38,7 +41,8 @@ function LoginPage() {
     try {
       setIsFetching(true);
       await login(credentials, rememberMe);
-      onLogin();
+      /* onLogin(); */
+      dispatch(authLogin());
 
       const to = location.state?.from ?? "/";
       navigate(to, { replace: true });
