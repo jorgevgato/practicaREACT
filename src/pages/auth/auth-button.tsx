@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router";
 import { logout } from "./service";
 import { authLogout } from "../../store/action";
 import { useAppDispatch, useAppSelector } from "../../store";
+import { getIsLogged } from "../../store/selectors";
 
 interface AuthButtonProps {
   className?: string;
@@ -10,7 +11,7 @@ interface AuthButtonProps {
 
 export default function AuthButton({ className }: AuthButtonProps) {
   /* const { isLogged, onLogout } = useAuth(); */
-  const isLogged = useAppSelector((state) => state.auth);
+  const isLogged = useAppSelector(getIsLogged);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const handleLogoutClick = async () => {

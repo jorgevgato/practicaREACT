@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 /* import { useAuth } from "./context"; */
 import { Navigate, useLocation } from "react-router";
 import { useAppSelector } from "../../store";
+import { getIsLogged } from "../../store/selectors";
 
 interface RequireAuthProps {
   children: ReactNode;
@@ -9,7 +10,7 @@ interface RequireAuthProps {
 
 function RequireAuth({ children }: RequireAuthProps) {
   /* const { isLogged } = useAuth(); */
-  const isLogged = useAppSelector((state) => state.auth);
+  const isLogged = useAppSelector(getIsLogged);
   const location = useLocation();
 
   if (!isLogged) {
