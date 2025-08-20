@@ -5,12 +5,11 @@ import "../../styles/form.css";
 import { Link, useLocation, useNavigate } from "react-router";
 import logo from "../../assets/react.svg";
 import { AxiosError } from "axios";
-import { authLogin } from "../../store/action";
-import { useAppDispatch } from "../../store";
+import { useLoginAction } from "../../store/hooks";
 
 function LoginPage() {
   /* const { onLogin } = useAuth(); */
-  const dispatch = useAppDispatch();
+  const loginAction = useLoginAction();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -42,7 +41,7 @@ function LoginPage() {
       setIsFetching(true);
       await login(credentials, rememberMe);
       /* onLogin(); */
-      dispatch(authLogin());
+      loginAction();
 
       const to = location.state?.from ?? "/";
       navigate(to, { replace: true });

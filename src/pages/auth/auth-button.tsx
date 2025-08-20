@@ -1,9 +1,7 @@
 import { Link, useNavigate } from "react-router";
 /* import { useAuth } from "./context"; */
 import { logout } from "./service";
-import { authLogout } from "../../store/action";
-import { useAppDispatch, useAppSelector } from "../../store";
-import { getIsLogged } from "../../store/selectors";
+import { useAuth, useLogoutAction } from "../../store/hooks";
 
 interface AuthButtonProps {
   className?: string;
@@ -11,13 +9,13 @@ interface AuthButtonProps {
 
 export default function AuthButton({ className }: AuthButtonProps) {
   /* const { isLogged, onLogout } = useAuth(); */
-  const isLogged = useAppSelector(getIsLogged);
-  const dispatch = useAppDispatch();
+  const isLogged = useAuth();
+  const logoutAction = useLogoutAction();
   const navigate = useNavigate();
   const handleLogoutClick = async () => {
     await logout();
     /* onLogout(); */
-    dispatch(authLogout());
+    logoutAction();
     navigate("/", { replace: true });
   };
   return isLogged ? (
