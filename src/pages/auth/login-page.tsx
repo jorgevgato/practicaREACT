@@ -14,14 +14,14 @@ function LoginPage() {
   const navigate = useNavigate();
 
   const [credentials, setCredentials] = useState({
-    email: "",
+    username: "",
     password: "",
   });
   const [rememberMe, setRememberMe] = useState(false);
-  const { email, password } = credentials;
+  const { username, password } = credentials;
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [error, setError] = useState<{ message: string } | null>(null);
-  const disabled = !email || !password || isFetching;
+  const disabled = !username || !password || isFetching;
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     setCredentials((prevCredentials) => ({
@@ -63,8 +63,8 @@ function LoginPage() {
             Email
             <input
               type="text"
-              name="email"
-              value={email}
+              name="username"
+              value={username}
               onChange={handleChange}
             />
           </label>

@@ -10,7 +10,7 @@ export const login = async (
   credentials: Credentials,
   rememberMe: boolean = false,
 ) => {
-  const response = await client.post<Login>("/api/auth/login", credentials);
+  const response = await client.post<Login>("/auth/login", credentials);
   const { accessToken } = response.data;
 
   if (rememberMe) {
