@@ -1,15 +1,20 @@
 import { useNavigate, useParams } from "react-router";
 import Page from "../../components/layout/page";
 import { useEffect, useState } from "react";
-import type { Advert } from "./types";
+/* import type { Advert } from "./types"; */
 import { deleteAdvert, getAdvertDetail } from "./service";
 import { AxiosError } from "axios";
 import AdvertItem from "./advert-item";
 import "../../styles/advert-detail.css";
+import { useAppDispatch, useAppSelector } from "../../store";
+import { getDetail } from "../../store/selectors";
+import { detailLoaded } from "../../store/action";
 
 function AdvertDetail() {
   const params = useParams();
-  const [advert, setAdvert] = useState<Advert | null>(null);
+  /* const [advert, setAdvert] = useState<Advert | null>(null); */
+  const dispatch = useAppDispatch();
+  const detail = useAppSelector(getDetail);
   const [showConfirm, setShowConfirm] = useState(false);
   const navigate = useNavigate();
 
@@ -18,7 +23,7 @@ function AdvertDetail() {
       return;
     }
     getAdvertDetail(params.advertId)
-      .then((advert) => setAdvert(advert))
+      .then((detail) => dispatch(detailLoaded(detail)))
       .catch((error) => {
         if (error instanceof AxiosError) {
           if (error.status === 404) {
@@ -26,13 +31,13 @@ function AdvertDetail() {
           }
         }
       });
-  }, [params.advertId, navigate]);
+  }, [params.advertId, dispatch, navigate]);
 
   const confirmDelete = async () => {
-    if (!advert) return;
+    if (!detail) return;
 
     try {
-      await deleteAdvert(advert.id);
+      await deleteAdvert(detail.id);
       navigate("/"), { replace: true };
     } catch (error) {
       console.error("Error al borrar el anuncio", error);
@@ -42,11 +47,11 @@ function AdvertDetail() {
 
   return (
     <Page title="">
-      {advert ? (
+      {detail ? (
         <div className="advert-detail-page">
           <div className="ad-container">
             {" "}
-            <AdvertItem advert={advert} />{" "}
+            <AdvertItem advert={detail} />{" "}
             <button
               className="delete-button"
               onClick={() => setShowConfirm(true)}

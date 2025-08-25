@@ -68,6 +68,15 @@ export function adverts(
   adverts
 }) */
 
+export function detail(state: Advert | null = null, action: Actions) {
+  switch (action.type) {
+    case "detail/loaded":
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
 export function tags(state = defaultState.tags, action: Actions) {
   switch (action.type) {
     case "tags/loaded":
