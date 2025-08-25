@@ -18,6 +18,11 @@ type AdvertsCreated = {
   payload: Advert;
 };
 
+type TagsLoaded = {
+  type: "tags/loaded";
+  payload: string[];
+};
+
 export const authLogin = (): AuthLogin => ({
   type: "auth/login",
 });
@@ -36,4 +41,14 @@ export const advertsCreated = (advert: Advert): AdvertsCreated => ({
   payload: advert,
 });
 
-export type Actions = AuthLogin | AuthLogout | AdvertsLoaded | AdvertsCreated;
+export const tagsLoaded = (tags: string[]): TagsLoaded => ({
+  type: "tags/loaded",
+  payload: tags,
+});
+
+export type Actions =
+  | AuthLogin
+  | AuthLogout
+  | AdvertsLoaded
+  | AdvertsCreated
+  | TagsLoaded;

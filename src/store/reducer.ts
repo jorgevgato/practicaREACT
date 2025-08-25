@@ -4,11 +4,13 @@ import type { Actions } from "./action";
 export type State = {
   auth: boolean;
   adverts: Advert[];
+  tags: string[];
 };
 
 const defaultState: State = {
   auth: false,
   adverts: [],
+  tags: [],
 };
 
 /* export function reducer(state = defaultState, action: Actions): State {
@@ -65,3 +67,12 @@ export function adverts(
   auth,
   adverts
 }) */
+
+export function tags(state = defaultState.tags, action: Actions) {
+  switch (action.type) {
+    case "tags/loaded":
+      return action.payload;
+    default:
+      return state;
+  }
+}
