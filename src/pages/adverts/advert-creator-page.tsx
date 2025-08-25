@@ -3,10 +3,10 @@ import "../../styles/form.css";
 import { useNavigate } from "react-router";
 import { AxiosError } from "axios";
 import { createAdvert, getTags } from "./service";
+import { useAppDispatch, useAppSelector } from "../../store";
+import { advertsCreated, tagsLoaded } from "../../store/action";
 
 function AdvertCreator() {
-  const navigate = useNavigate();
-
   const [advert, setAdvert] = useState<{
     name: string;
     price: string;
@@ -21,25 +21,28 @@ function AdvertCreator() {
     photo: null,
   });
 
+  const navigate = useNavigate();
   const { name, price, sale, tags, photo } = advert;
+  const dispatch = useAppDispatch();
   const [isFetching, setIsFetching] = useState<boolean>(false);
-  const [availableTags, setAvailableTags] = useState<string[]>([]);
+  const availableTags = useAppSelector((state) => state.tags || []);
   const [error, setError] = useState<{ message: string } | null>(null);
   const disabled = !name || !price || !tags.length || isFetching;
 
   useEffect(() => {
-    async function fetchTags() {
-      try {
-        const tags = await getTags();
-        setAvailableTags(tags);
-      } catch (error) {
+    getTags()
+      .then((tags) => {
+        dispatch(tagsLoaded(tags));
+      })
+      .catch((error) => {
         if (error instanceof AxiosError) {
-          setError({ message: error.response?.data?.message });
+          console.error(
+            "Error al obtener tags.",
+            error.response?.data?.message,
+          );
         }
-      }
-    }
-    fetchTags();
-  }, []);
+      });
+  }, [dispatch]);
 
   function handleChange(
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
@@ -91,6 +94,7 @@ function AdvertCreator() {
       }
 
       const newAdvert = await createAdvert(formData);
+      dispatch(advertsCreated(newAdvert));
       navigate(`/adverts/${newAdvert.id}`);
     } catch (error) {
       if (error instanceof AxiosError) {
