@@ -51,6 +51,8 @@ export function adverts(
       return action.payload;
     case "adverts/created":
       return [...state, action.payload];
+    case "advert/deleted":
+      return state.filter((advert) => advert.id !== action.payload)
     default:
       return state;
   }
@@ -72,6 +74,8 @@ export function detail(state: Advert | null = null, action: Actions) {
   switch (action.type) {
     case "detail/loaded":
       return action.payload;
+    case "advert/deleted":
+      return state && state.id === action.payload ? null : state
     default:
       return state;
   }

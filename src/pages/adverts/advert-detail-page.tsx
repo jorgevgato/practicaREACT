@@ -8,7 +8,7 @@ import AdvertItem from "./advert-item";
 import "../../styles/advert-detail.css";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { getDetail } from "../../store/selectors";
-import { detailLoaded } from "../../store/action";
+import { advertDeleted, detailLoaded } from "../../store/action";
 
 function AdvertDetail() {
   const params = useParams();
@@ -38,6 +38,7 @@ function AdvertDetail() {
 
     try {
       await deleteAdvert(detail.id);
+      dispatch(advertDeleted(detail.id))
       navigate("/"), { replace: true };
     } catch (error) {
       console.error("Error al borrar el anuncio", error);

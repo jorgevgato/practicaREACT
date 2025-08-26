@@ -18,6 +18,11 @@ type AdvertsCreated = {
   payload: Advert;
 };
 
+type AdvertDeleted = {
+  type: "advert/deleted"
+  payload: string
+}
+
 type DetailLoaded = {
   type: "detail/loaded";
   payload: Advert;
@@ -46,6 +51,11 @@ export const advertsCreated = (advert: Advert): AdvertsCreated => ({
   payload: advert,
 });
 
+export const advertDeleted = (id: string): AdvertDeleted => ({
+  type: "advert/deleted",
+  payload: id
+})
+
 export const detailLoaded = (advert: Advert): DetailLoaded => ({
   type: "detail/loaded",
   payload: advert,
@@ -61,5 +71,6 @@ export type Actions =
   | AuthLogout
   | AdvertsLoaded
   | AdvertsCreated
+  | AdvertDeleted
   | DetailLoaded
   | TagsLoaded;
