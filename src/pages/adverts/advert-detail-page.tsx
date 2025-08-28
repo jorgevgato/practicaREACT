@@ -38,7 +38,7 @@ function AdvertDetail() {
 
     try {
       await deleteAdvert(detail.id);
-      dispatch(advertDeleted(detail.id))
+      dispatch(advertDeleted(detail.id));
       navigate("/"), { replace: true };
     } catch (error) {
       console.error("Error al borrar el anuncio", error);
